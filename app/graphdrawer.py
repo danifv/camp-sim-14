@@ -11,7 +11,6 @@ from matplotlib.backends.backend_agg import FigureCanvasAgg
 from matplotlib.figure import Figure
 
 import unicodedata
-from werkzeug.debug.console import Console
 
 class GraphDrawer(object):
     
@@ -33,8 +32,6 @@ class GraphDrawer(object):
     @staticmethod
     def linear(x, a, m):
         y = []
-        print a
-        print m
         for val in x:
             y.append(float(a) + float(m)*float(val))
         return y

@@ -37,4 +37,9 @@ def testsim():
 
 @app.route('/linfigure')
 def linfigure():
-    return graphdrawer.GraphDrawer.plotter(graphdrawer.GraphDrawer.linear, [0.0, 1.0, 2.0, 3.0, 4.0], request.args.get('aField'), request.args.get('mField'))
+    a = request.args.get('aField')
+    m = request.args.get('mField')
+    if a == None or m == None:
+        return None
+    else:
+        return graphdrawer.GraphDrawer.plotter(graphdrawer.GraphDrawer.linear, [0.0, 1.0, 2.0, 3.0, 4.0], a, m)

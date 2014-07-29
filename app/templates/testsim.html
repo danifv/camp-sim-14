@@ -15,7 +15,7 @@
     </p>
     <p><input type="submit" value="Draw"></p>
     </form>
-    {% if url_for('linfigure', aField=form.aField.data, mField=form.mField.data) %}
+    {% if url_for('linfigure', aField=form.aField.data, mField=form.mField.data) != '/linfigure' %}
     <img src="{{ url_for('linfigure', aField=form.aField.data, mField=form.mField.data) }}" alt="Plot placeholder">
     {% endif %}
   </body>
