@@ -3,7 +3,7 @@ Created on Jul 27, 2014
 
 @author: daniel
 '''
-from flask import render_template
+from flask import render_template, send_file, request
 from app import app
 from app import testsimform
 from app import graphdrawer
@@ -31,11 +31,10 @@ def index():
 @app.route('/testsim', methods = ['GET', 'POST'])
 def testsim():
     form = testsimform.TestSimForm()
-    if form.validate_on_submit():
-        f = graphdrawer.GraphDrawer.plotter(graphdrawer.GraphDrawer.linear, [0,1,2,3,4], form.aField, form.mField)
-        f.seek(0)
-        data = f.read()
-        return data
     return render_template("testsim.html",
         title = 'Test simulation',
         form = form)
+
+@app.route('/linfigure')
+def linfigure():
+    return graphdrawer.GraphDrawer.plotter(graphdrawer.GraphDrawer.linear, [0.0, 1.0, 2.0, 3.0, 4.0], request.args.get('aField'), request.args.get('mField'))
