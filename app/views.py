@@ -39,7 +39,5 @@ def testsim():
 def linfigure():
     a = request.args.get('aField')
     m = request.args.get('mField')
-    if a == None or m == None:
-        return None
-    else:
-        return graphdrawer.GraphDrawer.plotter(graphdrawer.GraphDrawer.linear, [0.0, 1.0, 2.0, 3.0, 4.0], a, m)
+    return graphdrawer.GraphDrawer.plotter(graphdrawer.GraphDrawer.linear, [0.0, 1.0, 2.0, 3.0, 4.0], a, m)
+        

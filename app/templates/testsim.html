@@ -15,8 +15,9 @@
     </p>
     <p><input type="submit" value="Draw"></p>
     </form>
-    {% if url_for('linfigure', aField=form.aField.data, mField=form.mField.data) != '/linfigure' %}
-    <img src="{{ url_for('linfigure', aField=form.aField.data, mField=form.mField.data) }}" alt="Plot placeholder">
+    {% if url_for('linfigure', aField=form.aField.data, mField=form.mField.data) != '/linfigure' 
+    and form.mField.data != None and form.aField.data != None %}
+    	<img src="{{ url_for('linfigure', aField=form.aField.data, mField=form.mField.data) }}" alt="Plot placeholder">
     {% endif %}
   </body>
 </html>

@@ -10,16 +10,20 @@ from cStringIO import StringIO
 from matplotlib.backends.backend_agg import FigureCanvasAgg
 from matplotlib.figure import Figure
 
-import unicodedata
-
 class GraphDrawer(object):
     
     @staticmethod
     def plotter(func, x, *args):
         figure = Figure()
-        axis = figure.add_subplot(111)
+        axes = figure.add_subplot(111)
+        
+
         y = func(x, *args)
-        axis.plot(x, y)
+        axes.plot(x, y)
+        print x[0]
+        print x[-1]
+        axes.set_ylim(ymin=x[0], ymax=x[-1])        
+        axes.set_xlim(xmin=x[0], xmax=x[-1])
         
         canvas = FigureCanvasAgg(figure)
         output = StringIO()
@@ -33,8 +37,6 @@ class GraphDrawer(object):
     def linear(x, a, m):
         y = []
         for val in x:
-            y.append(float(a) + float(m)*float(val))
+            y.append(float(a) + float(m)*val)
         return y
-        
-        
     
