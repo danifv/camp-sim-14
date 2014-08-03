@@ -39,5 +39,12 @@ def testsim():
 def linfigure():
     a = request.args.get('aField')
     m = request.args.get('mField')
-    return graphdrawer.GraphDrawer.plotter(graphdrawer.GraphDrawer.linear, [0.0, 1.0, 2.0, 3.0, 4.0], a, m)
+    xMin = request.args.get('xMinField')
+    xMax = request.args.get('xMaxField')
+    iterations = request.args.get('iterations')
+    if xMin is None:
+        xMin = 0
+    if xMax is None:
+        xMax = iterations
+    return graphdrawer.GraphDrawer.plotter(graphdrawer.GraphDrawer.linear, xMin, xMax, a, m, iterations)
         
