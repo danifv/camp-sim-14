@@ -1,0 +1,29 @@
+<html>
+  <head>
+    <title>{{title}}</title>
+  </head>
+  <body>
+    <h1>{{title}}</h1>
+    <form action="" method="post" name="testsim">
+    <p>
+        Mikor kezdodjon a vadasszezon? (1-1000)<br>
+        {{form.huntStartField(size=5)}}<br>
+    </p>
+    <p>
+        Hany vadaszengedlyt adjunk ki? (1-1000)<br>
+        {{form.numberOfHuntersField(size=5)}}<br>
+    </p>
+    <p>
+        Levadaszhato nyulak szama:<br>
+        {{form.huntRabbitsField(size=5)}}<br>
+    </p>
+    <p>
+        Levadaszhato rokak szama:<br>
+        {{form.huntFoxesField(size=5)}}<br>
+    </p>
+    <p><input type="submit" value="Draw"></p>
+    </form>
+
+	<img src="{{ url_for('popSimChart', huntStart=form.huntStartField.data, numberOfHunters=form.numberOfHuntersField.data, huntRabbits=form.huntRabbitsField.data, huntFoxes=form.huntFoxesField.data) }}" alt="Plot placeholder">
+  </body>
+</html>

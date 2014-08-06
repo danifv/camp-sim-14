@@ -13,21 +13,19 @@ from matplotlib.figure import Figure
 class GraphDrawer(object):
     
     @staticmethod
-    def plotter(func, xMin, xMax, a, m, iterations):
+    def plotter(xMin, xMax, dataSeries):
         figure = Figure()
         axes = figure.add_subplot(111)
 
-        x = [0]
-        for i in range(1, int(iterations)+1):
-            x.append(i)
-        y = func(x, a, m)
-        axes.plot(x, y)
+        x = range(xMin, xMax)
+        
+        for serie in dataSeries:
+            print serie       
+            axes.plot(x, serie)        
+        
         axes.set_xlim(float(xMin), float(xMax))
-        axes.set_ybound(float(y[0]), float(y[-1]))
+        axes.set_ybound(-500, 500)
 
-        #for debug
-        print('minimum y value: ' + str(y[0]))
-        print('maximum y value: ' + str(y[-1]))
 
         canvas = FigureCanvasAgg(figure)
         output = StringIO()
