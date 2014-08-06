@@ -18,13 +18,16 @@ class GraphDrawer(object):
         axes = figure.add_subplot(111)
 
         x = range(xMin, xMax)
+        plots = []
         
-        for serie in dataSeries:
-            print serie       
-            axes.plot(x, serie)        
+        for serie in dataSeries.values():
+            pls, = axes.plot(x, serie)
+            plots.append(pls)
+            
+        figure.legend(plots, dataSeries.keys()) 
         
         axes.set_xlim(float(xMin), float(xMax))
-        axes.set_ybound(-500, 500)
+        axes.set_ylim(0, 1000)
 
 
         canvas = FigureCanvasAgg(figure)

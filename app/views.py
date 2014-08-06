@@ -17,7 +17,7 @@ def index():
     links = [
              {
               'name': 'Populacio szimulalas',
-              'url': '/popsim'
+              'url': '/populationsim'
               }            
              ]    
     return render_template("index.html",
@@ -33,26 +33,26 @@ def testsim():
         title = 'Test simulation',
         form = form)
     
-@app.route('/popsim', methods = ['GET', 'POST'])
-def popsim():
+@app.route('/populationsim', methods = ['GET', 'POST'])
+def populationSim():
     form = popsimform.PopSimForm()
     return render_template("populationsim.html",
         title = 'Vadaszat',
         form = form)
     
-@app.route('/popsimchart')
-def popSimChart():
+@app.route('/populationsimchart')
+def populationSimChart():
     huntStart = request.args.get('huntStart')
     numberOfHunters = request.args.get('numberOfHunters')
     huntRabbits = request.args.get('huntRabbits')
     huntFoxes = request.args.get('huntFoxes')
     xMin = 0
-    xMax = 1000
+    xMax = 300
     
-    populationSim = PopulationSim(huntStart, numberOfHunters, huntRabbits, huntFoxes)
+    populationSim = PopulationSim(huntStart, numberOfHunters, huntRabbits, huntFoxes, 300)
     simResults = populationSim.simulate()
     
-    return graphdrawer.GraphDrawer.plotter(xMin, xMax, [simResults['rabbitPop'], simResults['foxPop']])
+    return graphdrawer.GraphDrawer.plotter(xMin, xMax, simResults)
     
     
     
