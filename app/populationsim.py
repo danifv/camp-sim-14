@@ -31,19 +31,20 @@ class Rabbits(object):
         return TimeEvents.TimeTick((float(self.currentPop)/float(self.maxPop)), numberOfHunters, self.currentPop)             
 
 class Foxes(object):
-    def __init__(self, currentPop, birthRate, deathRate):
+    def __init__(self, currentPop, birthRate, deathRate, maxPop):
         self.currentPop = currentPop
         self.birthRate = birthRate
         self.deathRate = deathRate
+        self.maxPop = maxPop
         
     def getBirths(self, numberOfHunts):
-        return TimeEvents.TimeTick(self.birthRate, numberOfHunts, numberOfHunts)
+        return TimeEvents.TimeTick(self.birthRate, numberOfHunts, min(self.maxPop, numberOfHunts))
     
     def getDeaths(self, numberOfHunts):
         return TimeEvents.TimeTick(self.deathRate, self.currentPop - numberOfHunts, self.currentPop)
     
     def getHunts(self, numberOfHunters):
-        return TimeEvents.TimeTick(1 - float(1)/float(self.currentPop), numberOfHunters, self.currentPop)
+        return TimeEvents.TimeTick(float(self.currentPop)/float(self.maxPop), numberOfHunters, self.currentPop)
     
 class Hunters(object):
     def __init__(self, numberOfHunters, maxRabbitHunts, maxFoxHunts):
@@ -59,12 +60,13 @@ class PopulationSim(object):
     foxDeathRate = 0.1
     
     maxRabbitPop = 1000
+    maxFoxPop = 200
     
     
     def __init__(self, numberOfHunters, maxRabbitHunts, maxFoxHunts, seasonStart, simulationLength):
         self.rabbits = Rabbits(self.rabbitStart, self.maxRabbitPop)
-        self.foxes = Foxes(self.foxStart, self.foxBirthRate, self.foxDeathRate)
-        self.hunters = Hunters(numberOfHunters, maxRabbitHunts, maxFoxHunts)
+        self.foxes = Foxes(self.foxStart, self.foxBirthRate, self.foxDeathRate, self.maxFoxPop)
+        self.hunters = Hunters(int(numberOfHunters), int(maxRabbitHunts), int(maxFoxHunts))
         self.seasonStart = seasonStart
         
         self.simulationLength = simulationLength
@@ -85,8 +87,9 @@ class PopulationSim(object):
             
             hunterRabbitHunts = 0
             hunterFoxHunts = 0
-
+            
             if self.isHuntingSeason(i):
+                print 'season'
                 hunterRabbitHunts = self.hunterHunt(self.rabbits, totalRabbitHunts, self.hunters.maxRabbitHunts)
                 hunterFoxHunts = self.hunterHunt(self.foxes, totalFoxHunts, self.hunters.maxFoxHunts)
             self.rabbits.currentPop = self.rabbits.currentPop + rBirths - rHunts - hunterRabbitHunts
@@ -101,7 +104,7 @@ class PopulationSim(object):
             
     
     def isHuntingSeason(self, time):
-        return time >= self.seasonStart
+        return int(time) >= int(self.seasonStart)
     
     def hunterHunt(self, prey, totalHunterPreyHunts, maxPreyHunts):
         hunterPreyHunts = prey.getHunts(self.hunters.numberOfHunters)
@@ -110,8 +113,5 @@ class PopulationSim(object):
         else:
             totalHunterPreyHunts = maxPreyHunts
             hunterPreyHunts = 0
+        print hunterPreyHunts
         return hunterPreyHunts
-    
-                
-        
-    

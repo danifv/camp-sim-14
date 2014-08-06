@@ -49,7 +49,7 @@ def populationSimChart():
     xMin = 0
     xMax = 300
     
-    populationSim = PopulationSim(huntStart, numberOfHunters, huntRabbits, huntFoxes, 300)
+    populationSim = PopulationSim(numberOfHunters, huntRabbits, huntFoxes, huntStart, 300)
     simResults = populationSim.simulate()
     
     return graphdrawer.GraphDrawer.plotter(xMin, xMax, simResults)
