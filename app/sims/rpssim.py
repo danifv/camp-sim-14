@@ -48,7 +48,7 @@ class RpsSim(object):
             playerRoll = self.playerDecide()
             
             compPlay = self.simulatePlay(compRoll, playerPrevPlay)
-            playerPlay = self.simulatePlay(playerRoll, compPrevPlay)            
+            playerPlay = self.simulatePlay(playerRoll, playerPrevPlay)            
             winner = self.determineWinner(playerPlay, compPlay)
             playerPrevPlay = playerPlay
             compPrevPlay = compPlay            
@@ -64,8 +64,8 @@ class RpsSim(object):
         
     def compDecide(self):
         hand = random.random()        
-        if hand < 3.0/6.0: roll = 'same'
-        elif hand < 4.0/6.0: roll = 'stronger'
+        if hand < 2.0/6.0: roll = 'same'
+        elif hand < 5.0/6.0: roll = 'stronger'
         else: roll = 'weaker'
         return roll
         
