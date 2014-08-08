@@ -1,0 +1,21 @@
+<html>
+  <head>
+    <title>{{title}}</title>
+  </head>
+  <body>
+    <h1>{{title}}</h1>
+    <form action="" method="post" name="populationsim">
+    <p>
+        Mekkora valoszinuseggel jatszol azonost mint a gep elozo korben? (0-1)<br>
+        {{form.sameField(size=5)}}<br>
+    </p>
+    <p>
+        Mekkora valoszinuseggel jatszol erosebbet mint a gep elozo korben?<br>
+        {{form.strongerField(size=5)}}<br>
+    </p>
+    <p><input type="submit" value="Calculate"></p>
+    </form>
+
+	<img src="{{ url_for('rpsSimChart', same=form.sameField.data, stronger=form.strongerField.data)}}"/>
+  </body>
+</html>

@@ -6,5 +6,3 @@ app.config.from_object('config')
 app.debug = True
 
 from app import views
-from app import testsimform
-from app import popsimform

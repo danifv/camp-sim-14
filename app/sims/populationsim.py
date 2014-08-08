@@ -56,7 +56,7 @@ class Hunters(object):
 class PopulationSim(object):
     rabbitStart = 500
     foxStart = 30
-    foxBirthRate = 0.3
+    foxBirthRate = 0.33
     foxDeathRate = 0.1
     
     maxRabbitPop = 1000
@@ -89,7 +89,6 @@ class PopulationSim(object):
             hunterFoxHunts = 0
             
             if self.isHuntingSeason(i):
-                print 'season'
                 hunterRabbitHunts = self.hunterHunt(self.rabbits, totalRabbitHunts, self.hunters.maxRabbitHunts)
                 hunterFoxHunts = self.hunterHunt(self.foxes, totalFoxHunts, self.hunters.maxFoxHunts)
             self.rabbits.currentPop = self.rabbits.currentPop + rBirths - rHunts - hunterRabbitHunts
@@ -113,5 +112,4 @@ class PopulationSim(object):
         else:
             totalHunterPreyHunts = maxPreyHunts
             hunterPreyHunts = 0
-        print hunterPreyHunts
         return hunterPreyHunts
