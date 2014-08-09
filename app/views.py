@@ -6,10 +6,10 @@ Created on Jul 27, 2014
 from flask import render_template, request
 from app import app
 from app import graphdrawer
-import rpssim
-import populationsim
-import rpssimform
-import popsimform
+from app import rpssim
+from app import populationsim
+from app import rpssimform
+from app import popsimform
 
 @app.route('/')
 @app.route('/index')
